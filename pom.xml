@@ -6,40 +6,45 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blade-shorturl</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/bladejava/blade-shorturl</url>
 
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<dependencies>
-		<dependency>
+	</properties> 
+	 
+	<dependencies> 
+		<dependency> 
 			<groupId>com.bladejava</groupId>
 			<artifactId>blade-core</artifactId>
-			<version>1.2.4</version>
+			<version>1.2.5-alpha</version>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>com.bladejava</groupId>
 			<artifactId>blade-sql2o</artifactId>
 			<version>1.2.4</version>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
 		</dependency>
-		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
-
+      
 	<build>
 		<finalName>blade-shorturl</finalName>
 		<plugins>
@@ -49,7 +54,7 @@
                 <version>6.1.7</version>
                 <configuration>
                 	<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
+					<scanIntervalSeconds>1</scanIntervalSeconds>
                 	<contextPath>/</contextPath>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

@@ -1,10 +1,13 @@
 package shorturl.route;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import shorturl.Hashids;
 import shorturl.UrlModel;
 import blade.annotation.Path;
 import blade.annotation.Route;
-import blade.kit.PatternKit;
+import blade.kit.StringKit;
 import blade.route.HttpMethod;
 import blade.servlet.Request;
 import blade.servlet.Response;
@@ -41,11 +44,12 @@ public class IndexRoute {
 	
 	@Route(value = "/", method = HttpMethod.POST)
 	public String save(Request request, Response response) {
-		String resJsp = "index.jsp";
+		String resJsp = "index";
+		
 		String longUrl = request.query("url");
-
-		if (!PatternKit.isURL(longUrl)) {
-			request.attribute("error", "非法的URL");
+		
+		if (!isURL(longUrl)) {
+			request.attribute("error", "无效的URL");
 			return resJsp;
 		}
 		
@@ -55,10 +59,11 @@ public class IndexRoute {
 			return resJsp;
 		}
 		
-		System.out.println("id = " + id);
-		
 		String hash = HASHIDS.encode(id);
 		request.attribute("url_hash", hash);
+		
+		System.out.println("id = " + id + ",url_hash=" + hash);
+		
 		return resJsp;
 	}
 
@@ -68,5 +73,18 @@ public class IndexRoute {
 	
 	private UrlModel get(int id) {
 		return urlModel.fetchByPk(id);
+	}
+	
+	private final String REGEX = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+	
+	private boolean isURL(String url) {
+		if(StringKit.isNotBlank(url)){
+			Pattern pattern = Pattern.compile(REGEX);
+			Matcher matcher = pattern.matcher(url);
+			if (matcher.find()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

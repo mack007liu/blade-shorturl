@@ -12,12 +12,10 @@ public class App extends BladeApplication {
 	@Override
 	public void init() {
 		Blade.routes("shorturl.route");
+		Blade.staticFolder("/static/");
 		Sql2oPlugin sql2oPlugin = Sql2oPlugin.INSTANCE;
 		sql2oPlugin.config("jdbc:mysql://127.0.0.1:3306/short_url", "com.mysql.jdbc.Driver", "root", "root");
 		sql2oPlugin.run();
 	}
 	
-	public static void main(String[] args) {
-		Blade.run(App.class, 9000);
-	}
 }
