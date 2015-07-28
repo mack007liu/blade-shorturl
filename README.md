@@ -4,8 +4,8 @@
 
 ```bash
 
-POST	http://127.0.0.1:9000/save?url=http://www.baidu.com
+POST	http://127.0.0.1:9000/?url=http://www.baidu.com
 
-Res		http://127.0.0.1:9000/a
+Res		http://127.0.0.1:9000/aE
 
 ```
